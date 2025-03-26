@@ -1,24 +1,19 @@
 import { test, expect } from "@playwright/test";
-import { Selectors, loginSelectors, time } from "./Selectors";
+import { Selectors } from "./Selectors";
 
-import { URLs, Credentials } from "../../../../constants/links";
-
-test.beforeEach(async ({ page }) => {
-  await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto(URLs.login);
-  await page.waitForSelector(loginSelectors.email);
-  await page.fill(loginSelectors.email, Credentials.email);
-  await page.fill(loginSelectors.password, Credentials.password);
-  await page.click(loginSelectors.submitButton);
-  await page.waitForEvent("load");
-});
+import { URLs, screenSize } from "../../../../constants/links";
 
 test("EF-43__Search and Filtering Functionality", async ({ page }) => {
+  await page.setViewportSize(screenSize);
+
+  await page.goto(URLs.units);
+
   const value = await page.locator(Selectors.name).nth(0).textContent();
 
   await expect(page.locator(Selectors.searchInput)).toBeVisible();
 
   await page.locator(Selectors.searchInput).fill(value || "Unit #269");
+
   await page.keyboard.press("Enter");
 
   await page.waitForTimeout(2000);
@@ -28,6 +23,7 @@ test("EF-43__Search and Filtering Functionality", async ({ page }) => {
     .first();
 
   await unitCell.scrollIntoViewIfNeeded();
+
   await page.addStyleTag({
     content: `
     ${Selectors.name}:nth-child(1) {

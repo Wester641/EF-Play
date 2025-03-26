@@ -14,11 +14,6 @@ export const Selectors = {
   vinInput: '[name="vin_sn"]',
   submitButton: 'button[type="submit"]',
 };
-export const loginSelectors = {
-  email: 'input[type="text"]',
-  password: 'input[type="password"]',
-  submitButton: 'button[type="submit"]',
-};
 
 export const stateRegistration = [
   "Illinois",

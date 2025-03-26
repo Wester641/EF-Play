@@ -50,6 +50,7 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       testMatch: /.*\.setup\.ts/,
     },
+
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"], storageState: ".auth/login.json" },

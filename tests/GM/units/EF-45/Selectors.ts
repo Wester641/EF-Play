@@ -10,11 +10,6 @@ export const Selectors = {
   totalAmountUnits: ".VehicleDashboard_total__answer__zNlyX",
   tabPages: ".css-1q2h7u5",
 };
-export const loginSelectors = {
-  email: 'input[type="text"]',
-  password: 'input[type="password"]',
-  submitButton: 'button[type="submit"]',
-};
 
 export const today = new Date().toDateString();
 export const time = new Date().toLocaleTimeString();

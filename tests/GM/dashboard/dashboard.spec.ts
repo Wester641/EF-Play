@@ -1,19 +1,13 @@
 import { test } from "@playwright/test";
-import { Selectors, loginSelectors } from "./Selectors";
 
-import { URLs, Credentials } from "../../../constants/links";
+import { Selectors  } from "./Selectors";
 
-test.beforeEach(async ({ page }) => {
-  await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto(URLs.login);
-  await page.waitForSelector(loginSelectors.email);
-  await page.fill(loginSelectors.email, Credentials.email);
-  await page.fill(loginSelectors.password, Credentials.password);
-  await page.click(loginSelectors.submitButton);
-  await page.waitForEvent("load");
-});
+
+import { URLs, screenSize } from "../../../constants/links";
 
 test("dashboard testing from 135 to 143 test cases.", async ({ page }) => {
+  await page.setViewportSize(screenSize);
+  
   await page.goto(URLs.dashboard);
 
   await page.addStyleTag({

@@ -27,14 +27,20 @@ export const URLs = {
   createUnit: "/create-unit",
   updateUnit: "/units/update/",
   subPage: "/units?page=1&filter=",
+  usersPage: "/users",
   userEditPage: "/users/update/",
   inspectionForms: "/inspections/forms",
   issueCreatePage: "/issues/add",
   issues: "/issues",
   criticalFaults: "/faults",
+
+
+  samsaraDevices: "/samsara-devices",
+
   serviceHistory: "/service-history",
   serviceTaskCreate: "/services/service-task/create",
   serviceTask: "/services/service-task/",
+  trainingPage: "/training-videos/",
   workOrders: "/work-orders",
   workOrdersCreate: "/work-orders/add",
   serviceRemindersPage: "/reminders/services",
@@ -50,6 +56,14 @@ export const URLs = {
   addParts: "/parts/create",
   partsPage: "/parts",
   onboarding_form: "/onboarding-form",
+
+
+  addServiseHistoryFromUnitPage:
+    /service-history\/create\/\?vehicle_id=[a-z0-9-]+/,
+  addIssueFromUnitPage: /issues\/add\/\?vehicle_id=[a-z0-9-]+/,
+  addWorkOrderFromUnitPage: /work-orders\/add\/\?vehicle_id=[a-z0-9-]+/,
+  addMeterHistoryFromUnitPage: /meter-history\/\?vehicle_id=[a-z0-9-]+/,
+
 
   unitsPage: /\/units\/[0-9a-fA-F-]+$/,
   unitsUpdatePage: /\/units\/update\/[0-9a-fA-F-]+$/,

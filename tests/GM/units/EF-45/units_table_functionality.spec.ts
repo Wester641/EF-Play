@@ -1,19 +1,14 @@
 import { test, expect } from "@playwright/test";
-import { Selectors, loginSelectors } from "./Selectors";
-import { URLs, Credentials } from "../../../../constants/links";
-
-test.beforeEach(async ({ page }) => {
-  await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto(URLs.login);
-  await page.waitForSelector(loginSelectors.email);
-  await page.fill(loginSelectors.email, Credentials.email);
-  await page.fill(loginSelectors.password, Credentials.password);
-  await page.click(loginSelectors.submitButton);
-  await page.waitForEvent("load");
-});
+import { Selectors } from "./Selectors";
+import { URLs, screenSize } from "../../../../constants/links";
 
 test("EF-45__Units Table Functionality", async ({ page }) => {
+  await page.setViewportSize(screenSize);
+  
+  await page.goto(URLs.units);
+
   await expect(page.locator(Selectors.searchInput)).toBeVisible();
+  
   await page.waitForTimeout(500);
 
   await page.locator(`${Selectors.firstUnit}`).first().scrollIntoViewIfNeeded();
@@ -47,7 +42,9 @@ test("EF-45__Units Table Functionality", async ({ page }) => {
   await page.locator(Selectors.archiveButton).nth(1).click();
 
   await page.locator(Selectors.firstUnit).first().click();
+  await page.waitForTimeout(4000);
   await expect(page.locator(Selectors.detailBlockInDetailPage)).toBeVisible();
+  await page.waitForTimeout(4000);
   await page.goBack();
   await expect(page).toHaveURL(URLs.units);
 
