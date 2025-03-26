@@ -3,6 +3,16 @@ export const Credentials = {
   password: "zafarzhon77",
 };
 
+export const loginSelectors = {
+  email: 'input[type="text"]',
+  password: 'input[type="password"]',
+  submitButton: 'button[type="submit"]',
+};
+
+export const screenSize = { width: 1920, height: 1080 };
+export const timeout = { timeout: 10000 };
+const BASE_URL = "https://app.easyfleet.ai";
+
 export const URLs = {
   login: "/login",
   dashboard: "/dashboard",
@@ -21,6 +31,7 @@ export const URLs = {
   inspectionForms: "/inspections/forms",
   issueCreatePage: "/issues/add",
   issues: "/issues",
+  criticalFaults: "/faults",
   serviceHistory: "/service-history",
   serviceTaskCreate: "/services/service-task/create",
   serviceTask: "/services/service-task/",
@@ -38,40 +49,31 @@ export const URLs = {
   vendorsPage: "/vendor",
   addParts: "/parts/create",
   partsPage: "/parts",
+  onboarding_form: "/onboarding-form",
+
+  unitsPage: /\/units\/[0-9a-fA-F-]+$/,
+  unitsUpdatePage: /\/units\/update\/[0-9a-fA-F-]+$/,
+  updateSpecs: /\/units\/update\/[0-9a-fA-F-]+\/specifications$/,
+  updateFinance: /\/units\/update\/[0-9a-fA-F-]+\/financial$/,
 
   api: {
-    login: "/api/v1/accounts/login/",
-    createFuelHistory: "/api/v1/fuel-entries/create/",
-    createUnit: "/api/v1/vehicles/create/",
-    deleteUnit: "/api/v1/vehicles/*/delete/",
-    getUnitDetail: "/api/v1/vehicles/**/",
-    editUnit: "/api/v1/vehicles/**/update/",
-    unitReq: "/api/v1/vehicles/?offset=0&limit=10",
-    completeReq: "/api/v1/dashboard/analytics/complete/",
-    unitFilterReq: `/api/v1/vehicles/**`,
-    // assignedUnitsReq: "/api/v1/vehicles/?offset=0&limit=10&is_assigned=true",
-    unitSubPageReq: "/api/v1/vehicles/?offset=0&limit=10",
-    getUnitDetailReq: "/api/v1/vehicles/**/",
-    getInfoLatestOdometerReq: "/api/v1/vehicles/**/latest-odometer/",
-    getLinkedUnitDetailReq: "/api/v1/vehicles/**/linked/",
-    createCommentReq: "/api/v1/vehicles/comments/create/",
-    deleteCommentReq: "/api/v1/vehicles/**/comments/delete/",
-    linkVehicleReq: `/api/v1/vehicles/**/link/`,
-    unLinkVehicleReq: `/api/v1/vehicles/**/unlink/`,
-    contactsReq: "/api/v1/accounts/contacts/?enable_fleetio_access=true",
-
-    createUser: "/api/v1/accounts/contacts/create/",
-    deleteUser: "/api/v1/accounts/contacts/**/delete/",
-    editUser: "/api/v1/accounts/contacts/**/update/",
-    getUser: "/api/v1/accounts/contacts/**/",
-    activeContactsRequest:
-      "/api/v1/accounts/contacts/?enable_fleetio_access=true&status=active&offset=0&limit=10",
-    archivedContactsRequest:
-      "/api/v1/accounts/contacts/?enable_fleetio_access=true&status=archived&offset=0&limit=10",
-    inactiveContactsRequest:
-      "/api/v1/accounts/contacts/?enable_fleetio_access=true&status=inactive&offset=0&limit=10",
-    userRoleFilter:
-      "/api/v1/accounts/contacts/?enable_fleetio_access=true&role=",
-    issuesCreateReq: "/api/v1/issues/create/",
+    VEHICLES_LIST: new RegExp(
+      `^${BASE_URL}/api\/v1\/vehicles\/[0-9a-fA-F-]+\/$`
+    ),
+    METER_ENTRIES_TAB: new RegExp(
+      `^${BASE_URL}/api/v1/vehicles/[0-9a-fA-F-]+/meter-entries/`
+    ),
+    SERVICES_TAB: new RegExp(
+      `^${BASE_URL}/api/v1/vehicles/[0-9a-fA-F-]+/services/`
+    ),
+    EQUIPMENTS_TAB: new RegExp(
+      `^${BASE_URL}/api/v1/vehicles/[0-9a-fA-F-]+/equipments/`
+    ),
+    ISSUES_TAB: new RegExp(
+      `^${BASE_URL}/api/v1/vehicles/[0-9a-fA-F-]+/issues/`
+    ),
   },
 };
+// ISSUES_TAB:
+// /https:\/\/app\.easyfleet\.ai\/api\/v1\/vehicles\/[0-9a-fA-F-]+\/issues\//,
+// /https:\/\/app\.easyfleet\.ai\/api\/v1\/vehicles\/[0-9a-fA-F-]+\/$/
