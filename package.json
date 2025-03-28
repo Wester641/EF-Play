@@ -6,7 +6,8 @@
   "scripts": {
     "test": "playwright test",
     "test-ui": "playwright test --ui",
-    "limit-workers": "playwright test --workers=1"
+    "limit-workers": "playwright test --workers=1",
+    "test-run-193-case": "npx playwright test --grep 'EF-193__Inspections History Page Navigation'"
   },
   "keywords": [],
   "author": "",
