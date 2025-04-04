@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { screenSize } from "../../../constants/links";
+import { screenSize } from "../../../../../constants/links";
 
 test("EF-219 verify page ;oads ", async ({ page }) => {
   await page.setViewportSize(screenSize);
