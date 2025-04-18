@@ -58,15 +58,15 @@ export default defineConfig({
       dependencies: ["setup"],
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"], storageState: ".auth/login.json" },
-    },
+    // {
+    //   name: "firefox",
+    //   use: { ...devices["Desktop Firefox"], storageState: ".auth/login.json" },
+    // },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"], storageState: ".auth/login.json" },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"], storageState: ".auth/login.json" },
+    // },
 
     /* Test against mobile viewports. */
     // {

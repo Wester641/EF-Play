@@ -15,8 +15,7 @@ setup("Login and save session", async ({ page }) => {
   await page.getByRole("button", { name: "Login" }).click();
 
   await page.waitForURL(
-    (url) =>
-      url.pathname === URLs.onboarding_form || url.pathname === URLs.units
+    (url) => url.pathname === "/dashboard" || url.pathname === URLs.units
   );
 
   await page.context().storageState({ path: ".auth/login.json" });
