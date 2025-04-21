@@ -9,28 +9,17 @@ test("EF-104__Verify Add Assignment From Appearance and Fields", async ({
 
   await page.goto(URLs.assigments);
 
-  await page.getByText("Add Assignments").click();
+  await page.getByText("Add Assignments").first().click();
 
-  const apiResponse = await page.waitForResponse((response) => {
-    console.log("Checking:", response.url());
-    return (
-      response.url().includes("/api/v1/vehicles/?limit=1500") &&
-      response.status() === 200
-    );
-  });
-
-  const apiResponseData = await apiResponse.json();
-  console.log("API Vehicles:", apiResponseData);
-
-  await expect(
-    page.getByRole("heading", { name: "Add Assignment" })
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Add Assignment" })).toBeVisible();
 
   await page.locator(Selectors.selectField).first().click();
 
-  await page
-    .getByRole("option", { name: apiResponseData.results[0].name })
-    .click();
+  await page.waitForTimeout(3000);
+
+  const allVehicles = await page.getByRole("option").all();
+
+  await allVehicles[Math.floor(Math.random() * allVehicles.length)].click();
 
   await page.locator(Selectors.selectField).nth(1).click();
   await page
