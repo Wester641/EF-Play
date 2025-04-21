@@ -13,9 +13,16 @@ test("EF-112__Switching between tabs ", async ({ page }) => {
   });
 
   await page.getByRole("tab", { name: "Assigned", exact: true }).click();
+  await page.waitForTimeout(2000);
+
   await page.getByRole("tab", { name: "Unassigned" }).click();
+  await page.waitForTimeout(2000);
+
   await page.getByRole("tab", { name: "Archived" }).click();
+  await page.waitForTimeout(2000);
+  
   await page.getByRole("tab", { name: "All" }).click();
+  await page.waitForTimeout(2000);
 
   const baseUrl = BASE_URL;
   const expectedUrls = [

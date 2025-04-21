@@ -11,57 +11,11 @@ test.describe.serial("EF-130__Roles Section", () => {
   
     await page.goto(URLs.settings);
   
-    await page.addStyleTag({
-      content: `
-        ${Selectors.tabNavigation} {
-          background-color: #7d9ec087 !important; 
-          border: 1px solid #7d9ec087 !important;      
-        }`,
-    });
-  
-    await page.waitForTimeout(500);
-  
-    // Remove styling
-    await page.addStyleTag({
-      content: `
-        ${Selectors.tabNavigation} {
-          background-color: transparent !important;
-          border: none !important;
-        }`,
-    });
-  
     await page.waitForTimeout(3000);
   
     await page.locator(Selectors.tabNavigation).nth(0).click();
   
     await page.waitForTimeout(3000);
-  
-    await page.addStyleTag({
-      content: `
-        ${Selectors.searchInput},
-        ${Selectors.settingsButton},
-        ${Selectors.infoBlock},
-        ${Selectors.dataResult},
-        ${Selectors.addButton} {
-          background-color: #7d9ec087 !important; 
-          border: 1px solid #7d9ec087 !important;      
-        }`,
-    });
-  
-    await page.waitForTimeout(500);
-  
-    // Remove styling
-    await page.addStyleTag({
-      content: `
-        ${Selectors.searchInput},
-        ${Selectors.settingsButton},
-        ${Selectors.infoBlock},
-        ${Selectors.dataResult},
-        ${Selectors.addButton} {
-          background-color: transparent !important;
-          border: none !important;
-        }`,
-    });
   
     await expect(page.locator(Selectors.searchInput)).toBeVisible();
   

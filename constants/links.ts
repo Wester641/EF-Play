@@ -41,6 +41,7 @@ export const URLs = {
   service_task_create: "/services/service-task/create/",
   serviceTask: "/services/service-task/",
   settings: "/settings/",
+  settingsRoles: "/settings/roles/",
   trainingPage: "/training-videos/",
   workOrders: "/work-orders",
   workOrdersCreate: "/work-orders/add",
