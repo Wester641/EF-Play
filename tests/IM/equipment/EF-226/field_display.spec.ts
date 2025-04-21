@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { screenSize } from "../../../../constants/links";
-import { Selectors } from "./Selectors";
+import { Selectors, headers } from "./Selectors";
 
 test("EF-226__Verify List Fields Display", async ({ page }) => {
   await page.setViewportSize(screenSize);
@@ -10,17 +10,7 @@ test("EF-226__Verify List Fields Display", async ({ page }) => {
 
   await page.waitForSelector(Selectors.headerTable, { state: "visible" });
 
-  const headers = await page.locator(Selectors.headerCell).allInnerTexts();
-  const expectedHeaders = [
-    "Status",
-    "Name",
-    "Type",
-    "Brand",
-    "Serial Number",
-    "Current Assigned",
-    "Linked Vehicle",
-    "Action",
-  ];
+  const visibleHeaders = await page.locator(Selectors.headerCell).allInnerTexts();
 
-  expect(headers).toEqual(expect.arrayContaining(expectedHeaders));
+  expect(visibleHeaders).toEqual(expect.arrayContaining(headers));
 });

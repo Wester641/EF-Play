@@ -31,7 +31,7 @@ test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
-  await page.locator(Selectors.moreButton).nth(0).click();
+  await page.locator(Selectors.moreButton).nth(1).click();
 
   await page.locator(Selectors.exportImportButton).nth(0).click();
 
@@ -49,7 +49,7 @@ test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
 
   await page.locator(Selectors.closeCompleteMessage).click();
 
-  await page.locator(Selectors.moreButton).nth(0).click();
+  await page.locator(Selectors.moreButton).nth(1).click();
 
   await page.locator(Selectors.exportImportButton).nth(0).click();
 

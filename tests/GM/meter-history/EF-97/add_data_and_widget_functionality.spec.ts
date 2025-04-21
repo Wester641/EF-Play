@@ -53,7 +53,7 @@ test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({
 
   await expect(page.locator(Selectors.dataCells).nth(0)).toContainText(String(randomVehicle))
 
-  await page.locator(Selectors.addButton).nth(1).click();
+  await page.getByText('Add Meter Entry').first().click();
 
   await page.waitForTimeout(3000);
 
@@ -106,7 +106,7 @@ test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({
   await expect(page.locator(Selectors.successAlert)).toContainText("Meter Entry is added!");
 
 
-  await page.locator(Selectors.addButton).nth(1).click();
+  await page.getByText('Add Meter Entry').first().click();
 
   await page.waitForTimeout(3000);
 
@@ -129,5 +129,4 @@ test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({
   await page.waitForTimeout(1000);
 
   await expect(page.locator(Selectors.successAlert)).not.toBeVisible();
- 
 });

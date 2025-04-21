@@ -28,27 +28,6 @@ test("EF-100__Verify Search Functionality and UI", async ({ page }) => {
   const randomVehicleShort = randomVehicleFull.slice(0, Math.floor(randomVehicleFull.length / 2));
   
   const allVehiclesBefore = await page.locator(Selectors.vehicleNameRow).allTextContents();
-
-  await page.addStyleTag({
-        content: `
-        ${Selectors.searchInput},
-        ${Selectors.vehicleNameRow} {
-          background-color: #7d9ec087 !important; 
-          border: 1px solid #7d9ec087 !important;      
-        }`,
-      });
-    
-  await page.waitForTimeout(500);
-    
-      // Remove styling
-  await page.addStyleTag({
-      content: `
-        ${Selectors.searchInput},
-        ${Selectors.vehicleNameRow} {
-          background-color: transparent !important;
-          border: none !important;
-        }`,
-  });
   
   await page.waitForTimeout(3000);
 
@@ -66,7 +45,7 @@ test("EF-100__Verify Search Functionality and UI", async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
-  await expect(page.locator(Selectors.vehicleCell)).toHaveText(randomVehicleFull);
+  await expect(page.locator(Selectors.vehicleCell).first()).toHaveText(randomVehicleFull);
 
   await page.locator(Selectors.searchInput).fill("");
 

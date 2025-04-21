@@ -3,3 +3,14 @@ export const Selectors = {
     headerCell: ".css-1bigob2",
     addDataButton: ".css-1yxmbwk",
   };
+
+export const headers = [
+  "Status",
+  "Name",
+  "Type",
+  "Brand",
+  "Serial Number",
+  "Current Assigned",
+  "Linked Vehicle",
+  "Action",
+];

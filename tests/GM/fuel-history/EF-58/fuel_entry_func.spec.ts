@@ -1,6 +1,6 @@
 import { test, expect, Locator } from "@playwright/test";
 import { Selectors } from "./Selectors";
-import { URLs } from "../../../../constants/links";
+import { URLs, screenSize } from "../../../../constants/links";
 
 
 test("EF-58__Fuel Entry Functionality", async ({ page }) => {
