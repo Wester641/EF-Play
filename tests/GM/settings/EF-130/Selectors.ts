@@ -9,7 +9,8 @@ export const Selectors = {
   inputField: ".Inputs_inputs__WMLTN",
   tickHeader: ".ModuleForm_tree_headers__HUpdz",
   tickRow: ".PermissionForm_permission__VKMRr",
-  permSelect: ".css-p58oka"
+  permSelect: ".css-p58oka",
+  amountOfItems: ".SettingsPagination_container__counts__tm2jY",
 
   };
   

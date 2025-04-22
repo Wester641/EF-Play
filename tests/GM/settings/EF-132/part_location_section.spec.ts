@@ -7,25 +7,6 @@ test("EF-132__Part Location Section", async ({ page }) => {
 
   await page.goto(URLs.settings);
 
-  await page.addStyleTag({
-    content: `
-      ${Selectors.tabNavigation} {
-        background-color: #7d9ec087 !important; 
-        border: 1px solid #7d9ec087 !important;      
-      }`,
-  });
-
-  await page.waitForTimeout(500);
-
-  // Remove styling
-  await page.addStyleTag({
-    content: `
-      ${Selectors.tabNavigation} {
-        background-color: transparent !important;
-        border: none !important;
-      }`,
-  });
-
   await page.waitForTimeout(3000);
 
   await page.locator(Selectors.tabNavigation).nth(2).click();
@@ -34,9 +15,9 @@ test("EF-132__Part Location Section", async ({ page }) => {
 
   await expect(page.locator(Selectors.dataRow).nth(0)).toBeVisible();
 
-  await expect(page.locator(Selectors.addButton)).toBeVisible();
+  await expect(page.getByText("Add Part locations").first()).toBeVisible();
 
-  await page.locator(Selectors.addButton).click();
+  await page.getByText("Add Part locations").first().click();
 
   await page.waitForTimeout(3000);
   
@@ -44,10 +25,9 @@ test("EF-132__Part Location Section", async ({ page }) => {
   
   const inputFieldCount = await page.locator(Selectors.inputField).count();
 
-  await expect(inputFieldCount).toBe(2);
+  expect(inputFieldCount).toBe(2);
 
   await expect(page.getByRole('button', { name: 'Cancel' })).toBeVisible();
 
   await expect(page.getByRole('button', { name: 'Save' })).toBeVisible();
-
 });
