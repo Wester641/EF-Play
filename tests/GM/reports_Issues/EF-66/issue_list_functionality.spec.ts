@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { URLs, screenSize } from "../../../../constants/links";
-// import { Selectors } from "./Selectors";
+import { Selectors } from "./Selectors";
 
 test("EF-66__issue_list_functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
@@ -11,14 +11,10 @@ test("EF-66__issue_list_functionality", async ({ page }) => {
     .filter({ hasText: /^Reports$/ })
     .click();
   await page.getByText("Issues2").click();
-  await page
-    .getByText(
-      "List of IssuesA comprehensive overview of all issues registered.Issues"
-    )
-    .click();
+  await page.getByText(Selectors.list_of_issuesA).click();
 
   // check search fields
-  await expect(page.locator('input[type="text"]')).toBeVisible();
+  await expect(page.locator(Selectors.search_bar)).toBeVisible();
 
   //   Verify dropdown filter options: Open, Overdue, Resolved
   //   1
@@ -51,9 +47,7 @@ test("EF-66__issue_list_functionality", async ({ page }) => {
       .nth(4)
   ).toBeVisible();
   // 3
-  await page
-    .locator(".ModalFiltersStaticOptions_blockFiltering__blockText__lZ7eI")
-    .click();
+  await page.locator(Selectors.blockText).click();
   await page
     .locator("div")
     .filter({ hasText: /^Resolved$/ })
@@ -68,12 +62,8 @@ test("EF-66__issue_list_functionality", async ({ page }) => {
   // 4
 
   //   Verify the presence of widgets: Issues By Status and Top 5 Vehicles with Most Issues, with switch toggles and charts
-  await expect(page.getByText("Issues by StatusOFF/ONResolved")).toBeVisible();
-  await expect(
-    page.getByText(
-      "Top 5 Vehicles with Most IssuesOFF/ONTrailer #1000 6Trailer #628 5Trailer #"
-    )
-  ).toBeVisible();
+  await expect(page.getByText(Selectors.issues)).toBeVisible();
+  await expect(page.getByText(Selectors.vehicles)).toBeVisible();
 
   //   Verify the table below with headers: Issue, Status, Summary, Reported By, Assigned, Due Date, Vehicle
   await expect(
@@ -103,9 +93,9 @@ test("EF-66__issue_list_functionality", async ({ page }) => {
   ).toBeVisible();
 
   // Enter an invalid search term
-  await page.locator('input[type="text"]').fill("sdfsdf");
+  await page.locator(Selectors.search_bar).fill("sdfsdf");
   await page.waitForTimeout(2000);
-  await page.locator('input[type="text"]').fill("");
+  await page.locator(Selectors.search_bar).fill("");
 });
 
 // FIX
