@@ -1,7 +1,9 @@
 export const Credentials = {
-  email: "shakirowww099@gmail.com",
-  password: "admin2025",
+  email: "zafarzhon77@gmail.com",
+  password: "zafarzhon77",
 };
+// email: "shakirowww099@gmail.com",
+// password: "admin2025",
 
 export const loginSelectors = {
   email: 'input[type="text"]',
