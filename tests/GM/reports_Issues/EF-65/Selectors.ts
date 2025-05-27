@@ -2,10 +2,17 @@ export const Selectors = {
   navigation_issues:
     "Faults SummaryAll the fault occurrences across vehicles.Issues",
 
-  navigation_status: "Most Common Faults Across FleetOFF/ONIssue Status",
+  bottom_header: [
+    "Code",
+    "Name",
+    "Description",
+    "Critical",
+    "Open",
+    "Pending",
+    "Ignored",
+    "Resolved",
+    "Last Occurred",
+  ],
 
-  navigation_vehicles: "Vehicles with Most Fault OccurrencesOFF/ONIssue Status",
+  search_bar: 'input[type="text"]',
 };
-
-// navigation
-// Faults SummaryAll the fault occurrences across vehicles.Issues

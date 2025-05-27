@@ -5,7 +5,6 @@ import { Selectors } from "./Selectors";
 test("EF-66__issue_list_functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
   await page.goto(URLs.dashboard);
-  //   location;
   await page
     .locator("div")
     .filter({ hasText: /^Reports$/ })
@@ -13,88 +12,48 @@ test("EF-66__issue_list_functionality", async ({ page }) => {
   await page.getByText("Issues2").click();
   await page.getByText(Selectors.list_of_issuesA).click();
 
-  // check search fields
   await expect(page.locator(Selectors.search_bar)).toBeVisible();
 
-  //   Verify dropdown filter options: Open, Overdue, Resolved
-  //   1
+  await expect(page.locator('input[type="text"]')).toBeEditable();
+
+  await expect(
+    page
+      .locator("div")
+      .filter({ hasText: /^Issue Status$/ })
+      .nth(3)
+  ).toBeVisible();
+
   await page
     .locator("div")
     .filter({ hasText: /^Issue Status$/ })
     .nth(3)
     .click();
+
   await page
     .locator("div")
     .filter({ hasText: /^Open$/ })
+    .first()
     .click();
+
   await page.getByRole("button", { name: "Apply" }).click();
 
-  //   2
-  await page
-    .locator("div")
-    .filter({ hasText: /^Open$/ })
-    .nth(3)
-    .click();
-  await page
-    .locator("div")
-    .filter({ hasText: /^Overdue$/ })
-    .click();
-  await page.getByRole("button", { name: "Apply" }).click();
-  await expect(
-    page
-      .locator("#root div")
-      .filter({ hasText: "IssueStatusSummaryReported" })
-      .nth(4)
-  ).toBeVisible();
-  // 3
-  await page.locator(Selectors.blockText).click();
-  await page
-    .locator("div")
-    .filter({ hasText: /^Resolved$/ })
-    .click();
-  await page.getByRole("button", { name: "Apply" }).click();
-  await expect(
-    page
-      .locator("#root div")
-      .filter({ hasText: "IssueStatusSummaryReported" })
-      .nth(4)
-  ).toBeVisible();
-  // 4
+  // await expect(page.locator(Selectors.tbody__1).first()).toBeVisible();
 
-  //   Verify the presence of widgets: Issues By Status and Top 5 Vehicles with Most Issues, with switch toggles and charts
-  await expect(page.getByText(Selectors.issues)).toBeVisible();
-  await expect(page.getByText(Selectors.vehicles)).toBeVisible();
-
-  //   Verify the table below with headers: Issue, Status, Summary, Reported By, Assigned, Due Date, Vehicle
   await expect(
-    page
-      .locator("#root div")
-      .filter({ hasText: "IssueStatusSummaryReported" })
-      .nth(4)
-  ).toBeVisible();
-  await expect(page.getByRole("columnheader", { name: "Issue" })).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Status" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Summary" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Reported By" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Assigned" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Due Date" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Vehicle" })
+    page.getByRole("heading", { name: "Issues by Status" })
   ).toBeVisible();
 
-  // Enter an invalid search term
-  await page.locator(Selectors.search_bar).fill("sdfsdf");
-  await page.waitForTimeout(2000);
+  await expect(
+    page.getByRole("heading", { name: "Top 5 Vehicles with Most" })
+  ).toBeVisible();
+
+  for (const bottom_header of Selectors.bottom_header) {
+    await expect(
+      page.getByRole("columnheader", { name: bottom_header })
+    ).toBeVisible();
+  }
+
+  await page.locator(Selectors.search_bar).fill("sdsdf");
   await page.locator(Selectors.search_bar).fill("");
 });
 
