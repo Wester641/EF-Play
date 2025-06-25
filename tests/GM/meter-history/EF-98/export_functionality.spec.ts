@@ -4,7 +4,7 @@ import { URLs, screenSize } from "../../../../constants/links";
 
 test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
-  
+
   await page.goto(URLs.meterHistory);
 
   await page.waitForTimeout(500);
@@ -31,7 +31,7 @@ test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
-  await page.locator(Selectors.moreButton).nth(1).click();
+  await page.locator(Selectors.moreButton).nth(0).click();
 
   await page.locator(Selectors.exportImportButton).nth(0).click();
 
@@ -45,11 +45,13 @@ test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
 
   await expect(page.locator(Selectors.completeMessage)).toBeVisible();
 
-  await expect(page.locator(Selectors.completeText)).toContainText("Completed: The Meter History has been exported");
+  await expect(page.locator(Selectors.completeText)).toContainText(
+    "Completed: The Meter History has been exported"
+  );
 
   await page.locator(Selectors.closeCompleteMessage).click();
 
-  await page.locator(Selectors.moreButton).nth(1).click();
+  await page.locator(Selectors.moreButton).nth(0).click();
 
   await page.locator(Selectors.exportImportButton).nth(0).click();
 
@@ -63,6 +65,7 @@ test("EF-98__Verify 'Export' Functionality", async ({ page }) => {
 
   await expect(page.locator(Selectors.completeMessage)).toBeVisible();
 
-  await expect(page.locator(Selectors.completeText)).toContainText("Completed: The Meter History has been exported");
-
+  await expect(page.locator(Selectors.completeText)).toContainText(
+    "Completed: The Meter History has been exported"
+  );
 });

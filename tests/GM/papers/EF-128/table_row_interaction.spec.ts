@@ -19,7 +19,9 @@ test("EF-128__Verify Table Row Interaction on 'Papers' Page", async ({
   await page.getByRole("button", { name: "Delete" }).click();
   await page.locator(Selectors.click_first_cell).click();
   await page.locator(Selectors.svg_third_child).click();
+
   await page.getByRole("button", { name: "Cancel" }).click();
   await page.locator(Selectors.click_first_cell).click();
+
   await page.locator(Selectors.svg_fourth_child).click();
 });

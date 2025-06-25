@@ -31,7 +31,6 @@ test("EF-93__Verify Search Field and Vehicle Filter", async ({ page }) => {
       }`,
   });
 
-
   await page.waitForTimeout(2000);
 
   const allRows = await page.locator(Selectors.dataRow).all();
@@ -41,7 +40,6 @@ test("EF-93__Verify Search Field and Vehicle Filter", async ({ page }) => {
   const allMeterValues: string[] = [];
 
   for (const row of allRows) {
-
     const nameCell = row.locator(Selectors.dataCell).first();
 
     const meterCell = row.locator(Selectors.dataCell).nth(2);
@@ -59,9 +57,11 @@ test("EF-93__Verify Search Field and Vehicle Filter", async ({ page }) => {
 
   expect(allMeterValues.length).toBe(10);
 
-  const randomName = allCellNames[Math.floor(Math.random() * allCellNames.length)];
+  const randomName =
+    allCellNames[Math.floor(Math.random() * allCellNames.length)];
 
-  const randomMeterValue = allMeterValues[Math.floor(Math.random() * allMeterValues.length)];
+  const randomMeterValue =
+    allMeterValues[Math.floor(Math.random() * allMeterValues.length)];
 
   await expect(page.locator(Selectors.searchField)).toBeVisible();
 
@@ -81,13 +81,15 @@ test("EF-93__Verify Search Field and Vehicle Filter", async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
-  const allVehicleResults = await page.locator(Selectors.vehicleFilterResult).all();
+  const allVehicleResults = await page
+    .locator(Selectors.vehicleFilterResult)
+    .all();
 
   for (const currentRow of allVehicleResults) {
     const text = await currentRow.innerText();
     if (text === String(randomName)) {
       await currentRow.click();
-      break
+      break;
     }
   }
 
@@ -98,5 +100,4 @@ test("EF-93__Verify Search Field and Vehicle Filter", async ({ page }) => {
   await expect(
     page.getByRole("cell", { name: randomName, exact: true }).first()
   ).toHaveText(randomName);
-
 });

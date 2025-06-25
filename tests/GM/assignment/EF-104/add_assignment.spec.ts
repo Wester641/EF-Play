@@ -11,10 +11,11 @@ test("EF-104__Verify Add Assignment From Appearance and Fields", async ({
 
   await page.getByText("Add Assignments").first().click();
 
-  await expect(page.getByRole("heading", { name: "Add Assignment" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Add Assignment" })
+  ).toBeVisible();
 
   await page.locator(Selectors.selectField).first().click();
-
   await page.waitForTimeout(3000);
 
   const allVehicles = await page.getByRole("option").all();
