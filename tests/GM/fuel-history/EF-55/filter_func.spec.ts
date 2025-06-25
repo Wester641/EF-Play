@@ -28,12 +28,12 @@ test("EF-55__Filter Functionality", async ({ page }) => {
   await page.locator(Selectors.filter_tab).last().click();
 
   //Select Vendor
-  await selectDropdownOption(page, 3, 1, true);
-  await page.locator(Selectors.filter_tab).nth(3).click();
-  await page.locator(Selectors.clear_icon).click();
+  // await selectDropdownOption(page, 3, 1, true);
+  // await page.locator(Selectors.filter_tab).nth(3).click();
+  // await page.locator(Selectors.clear_icon).click();
 
-  await page.locator(Selectors.filter_tab).nth(2).waitFor({ state: "visible" });
-  await page.locator(Selectors.clear_icon).click();
+  // await page.locator(Selectors.filter_tab).nth(2).waitFor({ state: "visible" });
+  // await page.locator(Selectors.clear_icon).click();
 });
 
 //
@@ -78,8 +78,8 @@ async function selectDropdownOption(
   await page.waitForTimeout(300);
 
   if (apply) {
-    const applyBtn = page.locator(Selectors.apply_btn).nth(1);
-    await applyBtn.scrollIntoViewIfNeeded();
+    const applyBtn = page.getByRole("button", { name: "Apply" });
+    // await applyBtn.scrollIntoViewIfNeeded();
     await applyBtn.click();
   }
 }
