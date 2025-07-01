@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { screenSize } from "../../../../constants/links";
+import { screenSize, URLs } from "../../../../constants/links";
 import { Selectors } from "./Selectors";
 
 const randomOption = Math.floor(Math.random() * 3);
@@ -7,7 +7,7 @@ const randomOption = Math.floor(Math.random() * 3);
 test("EF-213__a new Work Order is added to the list", async ({ page }) => {
   await page.setViewportSize(screenSize);
 
-  await page.goto("/issues");
+  await page.goto(URLs.issues);
   await page.getByRole("cell").nth(0).click();
   await page.locator(Selectors.first_cell).click();
 

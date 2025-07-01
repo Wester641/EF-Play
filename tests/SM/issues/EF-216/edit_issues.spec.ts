@@ -7,7 +7,7 @@ const randomOption = Math.floor(Math.random() * 3);
 test("EF-216__Edit issue functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
 
-  await page.goto("/issues");
+  await page.goto(URLs.issues);
   await page.getByRole("cell").nth(0).click();
   await page.getByRole("button").nth(2).click();
   await page.locator(Selectors.inputContainer).first().click();
