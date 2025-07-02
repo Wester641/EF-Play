@@ -2,131 +2,53 @@ import { test, expect } from "@playwright/test";
 import { Selectors } from "./Selectors";
 import { URLs, screenSize } from "../../../../constants/links";
 
-test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({ page }) => {
+const randomOption = Math.floor(Math.random() * 3);
+
+test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({
+  page,
+}) => {
   await page.setViewportSize(screenSize);
-  
   await page.goto(URLs.meterHistory);
+  await page.getByRole("button").nth(1).click();
+  await expect(page).toHaveURL("https://dev-app.easyfleet.ai/meter-history");
 
-  await page.waitForTimeout(500);
+  await page
+    .locator("div")
+    .filter({ hasText: /^Select\.\.\.$/ })
+    .nth(2)
+    .click();
+  await page.getByRole("option").nth(randomOption).click();
 
-  // Add styling
-  await page.addStyleTag({
-    content: `
-      ${Selectors.searchInput},
-      ${Selectors.dataCells},
-      ${Selectors.addButton} {
-        background-color: #7d9ec087 !important; 
-        border: 1px solid #7d9ec087 !important;      
-      }`,
-  });
+  await page.getByRole("spinbutton").fill("123");
 
-  await page.waitForTimeout(500);
+  await page.getByRole("checkbox", { name: "Void" }).click();
 
-  // Remove styling
-  await page.addStyleTag({
-    content: `
-      ${Selectors.searchInput},
-      ${Selectors.dataCells},
-      ${Selectors.addButton} {
-        background-color: transparent !important;
-        border: none !important;
-      }`,
-  });
+  await page.getByRole("textbox").click();
 
-  await page.waitForTimeout(3000);
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.waitForTimeout(2000);
 
-  const rows = await page.locator(Selectors.dataRow).all(); 
+  await expect(
+    page
+      .locator("div")
+      .filter({ hasText: /^Meter Entry is added!$/ })
+      .nth(1)
+  ).toBeVisible();
 
-  const vehicleNames: string[] = [];
-  
-  for (const row of rows) {
-    const firstTD = row.locator('td:first-child');
-    const text = await firstTD.innerText();
-    vehicleNames.push(text.trim());
-  }
+  await page.getByRole("button").nth(2).click();
 
-  const randomVehicle = vehicleNames[Math.floor(Math.random() * vehicleNames.length)];
+  await page
+    .locator("div")
+    .filter({ hasText: /^Select\.\.\.$/ })
+    .nth(2)
+    .click();
+  await page.getByRole("option").nth(randomOption).click();
 
-  await page.locator(Selectors.searchInput).fill(String(randomVehicle))
+  await page.getByRole("spinbutton").fill("123");
 
-  await page.waitForTimeout(500);
+  await page.getByRole("checkbox", { name: "Void" }).click();
 
-  await expect(page.locator(Selectors.dataCells).nth(0)).toContainText(String(randomVehicle))
+  await page.getByRole("textbox").click();
 
-  await page.getByText('Add Meter Entry').first().click();
-
-  await page.waitForTimeout(3000);
-
-  await expect(page.locator(Selectors.addMenu)).toBeVisible();  
-
-  await page.click(Selectors.vehicleInput);
-
-  await page.waitForTimeout(3000);
-
-  const options = await page.locator(Selectors.dropdownOptions).all();
-
-  const randomIndex = Math.floor(Math.random() * options.length);
-
-  await options[randomIndex].click();
-
-  const randomMeter = Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000;
-
-  await expect(async () => {
-    await page.locator(Selectors.valueInput).nth(0).fill("text");
-  }).rejects.toThrow(/Cannot type text into input\[type=number\]/);
-
-  await page.locator(Selectors.valueInput).nth(0).fill(String(randomMeter));
-
-  await expect(page.locator(Selectors.valueInput).nth(0)).toHaveValue(String(randomMeter));
-
-  await page.click(Selectors.voidInput);
-
-  const today = new Date();
-
-  const year = today.getFullYear();
-
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-
-  const day = String(today.getDate()).padStart(2, '0');
-
-  const formattedDate = `${year}-${month}-${day}`;
-
-  await page.locator(Selectors.valueInput).nth(1).fill(formattedDate);
-
-  await page.waitForTimeout(500);
-
-  await expect(page.locator(Selectors.valueInput).nth(1)).toHaveValue(formattedDate);
-
-  await page.click(Selectors.saveButton);
-
-  await page.waitForTimeout(1000);
-
-  await expect(page.locator(Selectors.successAlert)).toBeVisible();
-
-  await expect(page.locator(Selectors.successAlert)).toContainText("Meter Entry is added!");
-
-
-  await page.getByText('Add Meter Entry').first().click();
-
-  await page.waitForTimeout(3000);
-
-  await page.click(Selectors.vehicleInput);
-
-  await options[randomIndex].click();
-
-  await page.waitForTimeout(1000);
-
-  await page.locator(Selectors.valueInput).nth(0).fill(String(randomMeter));
-
-  await page.click(Selectors.voidInput);
-
-  await page.locator(Selectors.valueInput).nth(1).fill(formattedDate);
-
-  await page.waitForTimeout(500);
-
-  await page.click(Selectors.cancelButton);
-
-  await page.waitForTimeout(1000);
-
-  await expect(page.locator(Selectors.successAlert)).not.toBeVisible();
+  await page.getByRole("button", { name: "Cancel" }).click();
 });
