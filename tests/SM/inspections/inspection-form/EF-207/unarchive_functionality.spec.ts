@@ -6,9 +6,7 @@ test("EF-207__Unarchive Forms Functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
 
   await page.goto(URLs.inspectionForms);
-
   await expect(page).toHaveURL(URLs.inspectionForms);
-
   await page.getByRole("tab", { name: "Archived" }).click();
 
   await page
