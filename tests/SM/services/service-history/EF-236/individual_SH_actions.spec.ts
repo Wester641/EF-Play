@@ -65,31 +65,36 @@ test("EF-236__Individual Service History Functionality", async ({ page }) => {
   await page.goto(URLs.serviceHistory);
 
   await page.locator(Selectors.three_dots_menu).nth(2).click();
-  await page.locator(Selectors.edit_btn).nth(1).click();
-  await page.waitForTimeout(1000);
-
-  await page.locator(Selectors.select_value).nth(0).click();
-  await page.getByRole("option").nth(randomOption).click();
+  await page.getByRole("menuitem", { name: "Delete" }).click();
+  await page.getByRole("button", { name: "Delete" }).click();
   await page
-    .locator("div")
-    .filter({ hasText: /^Nearest vendors$/ })
-    .locator("div")
-    .click();
+    .getByText("Service History successfully deleted")
+    .waitFor({ state: "visible" });
+  //await page.locator(Selectors.edit_btn).nth(1).click();
+  // await page.waitForTimeout(1000);
 
-  for (let i = 1; i < 5; i++) {
-    await page.locator(Selectors.select_value).nth(i).click();
-    await page.waitForTimeout(300);
-    await page.getByRole("option").nth(randomOption).click();
-  }
+  // await page.locator(Selectors.select_value).nth(0).click();
+  // await page.getByRole("option").nth(randomOption).click();
+  // await page
+  //   .locator("div")
+  //   .filter({ hasText: /^Nearest vendors$/ })
+  //   .locator("div")
+  //   .click();
 
-  await page.locator(Selectors.select_value).nth(7).click();
-  await page.getByRole("option").nth(0).click();
+  // for (let i = 1; i < 5; i++) {
+  //   await page.locator(Selectors.select_value).nth(i).click();
+  //   await page.waitForTimeout(300);
+  //   await page.getByRole("option").nth(randomOption).click();
+  // }
 
-  await page.locator(Selectors.select_value).nth(8).click();
-  await page.getByRole("option").nth(randomOption).click();
-  await page
-    .getByRole("button", { name: "Save Service Entry" })
-    .scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Save Service Entry" }).click();
-  await page.getByRole("cell").nth(7).click();
+  // await page.locator(Selectors.select_value).nth(7).click();
+  // await page.getByRole("option").nth(0).click();
+
+  // await page.locator(Selectors.select_value).nth(8).click();
+  // await page.getByRole("option").nth(randomOption).click();
+  // await page
+  //   .getByRole("button", { name: "Save Service Entry" })
+  //   .scrollIntoViewIfNeeded();
+  // await page.getByRole("button", { name: "Save Service Entry" }).click();
+  // await page.getByRole("cell").nth(7).click();
 });
