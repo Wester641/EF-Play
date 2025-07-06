@@ -7,8 +7,8 @@
     "test": "playwright test",
     "test-ui": "playwright test --ui",
     "limit-workers": "playwright test --workers=1",
-    "EF-236-debug": "playwright test tests/SM/services/service-history/EF-236/individual_SH_actions.spec.ts --debug",
-    "EF-236": "playwright test tests/SM/services/service-history/EF-236/individual_SH_actions.spec.ts"
+    "EF-239-debug": "playwright test tests/SM/services/service-task/EF-239/add_template.spec.ts --debug",
+    "EF-239": "playwright test tests/SM/services/service-task/EF-239/add_template.spec.ts"
   },
   "keywords": [],
   "author": "",
