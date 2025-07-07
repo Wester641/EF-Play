@@ -4,7 +4,7 @@ export const Selectors = {
   work_order: ".css-1liixou",
   detailsBlock: ".Block_block__U3GqW",
   inputField: ".css-19bb58m",
-  vendor: ".nearestVendors_nearestVendor__RfT4W",
+  //vendor: ".nearestVendors_nearestVendor__RfT4W",
   dateInput: ".css-mnn31",
 };
 
