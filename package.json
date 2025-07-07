@@ -7,7 +7,8 @@
     "test": "playwright test",
     "test-ui": "playwright test --ui",
     "limit-workers": "playwright test --workers=1",
-    "test-run-193-case": "npx playwright test --grep 'EF-193__Inspections History Page Navigation'"
+    "EF-239-debug": "playwright test tests/SM/services/service-task/EF-239/add_template.spec.ts --debug",
+    "EF-239": "playwright test tests/SM/services/service-task/EF-239/add_template.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,7 @@
     "@executeautomation/playwright-mcp-server": "^1.0.5",
     "@playwright/test": "^1.53.1",
     "@types/dotenv": "^8.2.3",
-    "@types/node": "^22.13.5"
+    "@types/node": "^22.16.0"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

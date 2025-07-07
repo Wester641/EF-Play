@@ -65,6 +65,14 @@ import { Selectors } from "./Selectors";
 import { screenSize, URLs } from "../../../../../constants/links";
 const randomOption = Math.floor(Math.random() * 3);
 
+const clickNearestVendorIcon = async (page) => {
+  await page
+    .locator("div")
+    .filter({ hasText: /^Nearest Vendor$/ })
+    .getByRole("img")
+    .click();
+};
+
 test("EF-221__Edit service history functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
   await page.goto(URLs.serviceHistory);
@@ -72,13 +80,14 @@ test("EF-221__Edit service history functionality", async ({ page }) => {
   await page.getByRole("cell").nth(7).click();
   await page.getByText("Edit", { exact: true }).click();
 
+  await page
+    .getByText("There is no odometer reading for this vehicle")
+    .waitFor({ state: "hidden" });
+  await clickNearestVendorIcon(page);
+
   await page.locator(Selectors.select_value).nth(0).click();
   await page.getByRole("option").nth(randomOption).click();
-  await page
-    .locator("div")
-    .filter({ hasText: /^Nearest vendors$/ })
-    .locator("div")
-    .click();
+  await clickNearestVendorIcon(page);
 
   for (let i = 1; i < 5; i++) {
     await page.locator(Selectors.select_value).nth(i).click();

@@ -23,15 +23,18 @@ test("EF-239__Add template", async ({ page }) => {
     .locator(Selectors.description)
     .first()
     .fill(`Description has been added on ${today} at ${time}`);
-  await page.locator(Selectors.system_code).first().click();
+
+  await page.locator(Selectors.category_code).nth(2).click();
+  await page.getByRole("option").nth(random).click();
+  await page.locator(Selectors.category_code).last().click();
   await page.getByRole("option").nth(random).click();
 
-  await page.locator(Selectors.system_code).nth(3).click();
-  await page.getByRole("option").nth(random).click();
+  // await page.locator(Selectors.system_code).nth(3).click();
+  // await page.getByRole("option").nth(random).click();
 
   await page.getByRole("button", { name: "Save" }).click();
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(3000);
 
   expect(page.getByText("Service Task successfully created!")).toBeVisible();
 });
