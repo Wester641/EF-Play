@@ -92,6 +92,21 @@
 import { expect, test } from "@playwright/test";
 import { Selectors } from "./Selectors";
 import { screenSize, URLs } from "../../../../../constants/links";
+
+// Helper functions
+const clickNearestVendorIcon = async (page) => {
+  await page
+    .locator("div")
+    .filter({ hasText: /^Nearest Vendor$/ })
+    .getByRole("img")
+    .click();
+};
+const odometerReadingMsg = async (page) => {
+  await page
+    .getByText("There is no odometer reading for this vehicle")
+    .waitFor({ state: "hidden" });
+};
+
 const randomOption = Math.floor(Math.random() * 3);
 
 test("EF-247__Add work order functionality", async ({ page }) => {
@@ -102,15 +117,12 @@ test("EF-247__Add work order functionality", async ({ page }) => {
 
   await page.locator(Selectors.select_value).nth(0).click();
   await page.getByRole("option").nth(randomOption).click();
-  await page
-    .locator("div")
-    .filter({ hasText: /^Nearest vendors$/ })
-    .locator("div")
-    .click();
+  await odometerReadingMsg(page);
+  await clickNearestVendorIcon(page);
 
   for (let i = 1; i < 5; i++) {
     await page.locator(Selectors.select_value).nth(i).click();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(2000);
     await page.getByRole("option").nth(randomOption).click();
   }
 
