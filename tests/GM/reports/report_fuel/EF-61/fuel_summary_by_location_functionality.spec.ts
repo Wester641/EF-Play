@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { Selectors } from "./Selectors";
-import { URLs, screenSize } from "../../../../constants/links";
+import { URLs, screenSize } from "../../../../../constants/links";
 
 test("EF-61__fuel_summary_by_location_functionality", async ({ page }) => {
   await page.setViewportSize(screenSize);
