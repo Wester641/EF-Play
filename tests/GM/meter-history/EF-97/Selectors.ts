@@ -2,7 +2,7 @@ export const Selectors = {
     searchInput: ".SearchFiters_containerSearch__searchBox__UwgF2",
     dataRow: ".css-1liixou",
     dataCells: ".css-q34dxg",
-    addButton: ".css-1yxmbwk",
+    addButton: "svg.MuiSvgIcon-colorPrimary[width='40'][height='40']",
     addMenu: ".css-1ty026z",
     vehicleInput: ".react-select__input",
     valueInput: ".css-mnn31",

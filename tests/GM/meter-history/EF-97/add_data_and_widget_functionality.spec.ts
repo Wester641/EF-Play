@@ -35,7 +35,7 @@ test("EF-97__Verify 'Add Meter Entry' Button and Widget Functionality", async ({
       .nth(1)
   ).toBeVisible();
 
-  await page.getByRole("button").nth(2).click();
+  await page.locator(Selectors.addButton).click();
 
   await page
     .locator("div")
