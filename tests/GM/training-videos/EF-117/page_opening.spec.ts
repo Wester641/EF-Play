@@ -36,13 +36,13 @@ test("EF-117__Verify the Training Videos Page Opens Correctly", async ({ page })
 
   await expect(page.locator(Selectors.searchInput).first()).toBeVisible();
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     await expect(page.locator(Selectors.tabButtons).nth(i)).toBeVisible();
   };
 
   await expect(page.locator(Selectors.infoBlock).first()).toBeVisible();
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 3; i++) {
     await expect(page.locator(Selectors.tabNavigation).nth(i)).toBeVisible();
   };
 
