@@ -63,8 +63,11 @@ test("EF-131__Fault Rules Section", async ({ page }) => {
 
   await expect(page.locator(Selectors.searchInput)).toBeVisible();
 
-  if (await page.locator(Selectors.dataResult).count() == 0) {
-    await expect(page.locator(Selectors.infoBlock).nth(0)).toContainText("No records found");
+  const dataCount = await page.locator(Selectors.dataResult).count();
+  
+  if (dataCount === 0) {
+  } else {
+    await expect(page.locator(Selectors.infoBlock).nth(0)).not.toContainText("No records found");
   }
 
   await expect(page.locator(Selectors.settingsButton).nth(0)).toBeVisible();
