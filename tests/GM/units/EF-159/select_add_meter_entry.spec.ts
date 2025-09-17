@@ -15,7 +15,7 @@ test("EF-159__Select add meter entry", async ({ page }) => {
 
   // clicking on first unit
   await page.locator(Selectors.unit_cell).nth(0).click();
-  await page.locator(Selectors.addButton).nth(1).click();
+  await page.locator(Selectors.addButton).nth(2).click();
   await page.getByRole("link", { name: "Add Meter Entry" }).click();
 
   await expect(page).toHaveURL(URLs.addMeterHistoryFromUnitPage);
