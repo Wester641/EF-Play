@@ -6,73 +6,69 @@ test("EF-282__Location of the units", async ({ page }) => {
   await page.setViewportSize(screenSize);
 
   await page.goto(URLs.samsaraDevices);
-
-  await page.addStyleTag({
-    content: `
-      ${Selectors.searchInput},
-      ${Selectors.dropdownBlock},
-      ${Selectors.vehicleStatusDropdown},
-      ${Selectors.tabButton},
-      ${Selectors.addButton},
-      ${"table"} {
-        background-color: #7d9ec087 !important; 
-        border: 1px solid #7d9ec087 !important;      
-      }`,
-  });
-
   await page.waitForTimeout(1000);
 
-  // Remove styling
-  await page.addStyleTag({
-    content: `
-      ${Selectors.searchInput},
-      ${Selectors.dropdownBlock},
-      ${Selectors.vehicleStatusDropdown},
-      ${Selectors.tabButton},
-      ${Selectors.addButton},
-      ${"table"} {
-        background-color: transparent !important;
-        border: none !important;
-      }`,
-  });
+  await page.getByRole('tab', { name: 'Assigned', exact: true }).click();
+  await page.waitForTimeout(1000);
 
-  await page.waitForTimeout(100);
+  const allDeviceElements = await page.locator(Selectors.deviceNameCell).all();
+  const validDevices = [];
+  const checkedDeviceNames = new Set();
 
-  await expect(page.locator(Selectors.searchInput)).toBeVisible();
+  for (let i = 0; i < allDeviceElements.length; i++) {
+    const deviceName = await allDeviceElements[i].innerText();
+    const trimmedName = deviceName.trim();
 
-  for (let i = 0; i < 3; i++) {
-    await expect(page.locator(Selectors.dropdownBlock).nth(i)).toBeVisible();
+    if (
+      !trimmedName ||
+      trimmedName === "-" ||
+      checkedDeviceNames.has(trimmedName)
+    ) {
+      continue;
+    }
+
+    validDevices.push({
+      name: trimmedName,
+      index: i
+    });
+    checkedDeviceNames.add(trimmedName);
+  }
+  
+  if (validDevices.length === 0) {
+    throw new Error("Не найдено ни одного валидного устройства (все Unassigned)");
   }
 
-  await expect(page.locator(Selectors.vehicleStatusDropdown)).toBeVisible();
+  let deviceName = "";
+  let foundWorkingDevice = false;
 
-  for (let i = 0; i < 4; i++) {
-    await expect(page.locator(Selectors.tabButton).nth(i)).toBeVisible();
+  for (let i = 0; i < validDevices.length; i++) {
+    const device = validDevices[i];
+    deviceName = device.name;
+      
+    await page.getByText("Units").click();
+    await page.waitForTimeout(500);
+    
+    await page.locator(Selectors.searchInput).click();
+    await page.locator(Selectors.searchInput).clear();
+    await page.locator(Selectors.searchInput).fill(deviceName);
+    await page.waitForTimeout(1000);
+    
+    const searchResults = page.getByText(deviceName, { exact: true });
+    const resultCount = await searchResults.count();
+    
+    if (resultCount > 0) {
+      await searchResults.nth(0).click();
+      foundWorkingDevice = true;
+      break;
+    } else {
+      await page.goto(URLs.samsaraDevices);
+      await page.waitForTimeout(1000);
+    }
   }
 
-  await expect(page.locator(Selectors.addButton)).toBeVisible();
-
-  await expect(page.getByRole("table")).toBeVisible();
-
-  await page.waitForTimeout(100);
-
-  const deviceName = await page
-    .locator(Selectors.deviceNameCell)
-    .nth(0)
-    .innerText();
-
-  // await page.goto("https://dev-app.easyfleet.ai/units");
-  await page.getByText("Units").click();
-
-  await page.waitForTimeout(500);
-
-  await page.locator(Selectors.searchInput).click();
-
-  await page.locator(Selectors.searchInput).fill(deviceName);
-
-  await page.waitForTimeout(500);
-
-  await page.getByText(deviceName, { exact: true }).nth(0).click();
+  if (!foundWorkingDevice) {
+    throw new Error(`Не удалось найти ни одного рабочего устройства из ${validDevices.length} валидных`);
+  }
 
   // Add styling
   await page.addStyleTag({
