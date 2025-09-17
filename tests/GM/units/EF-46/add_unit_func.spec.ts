@@ -25,7 +25,9 @@ test("EF-46__Add Unit Functionality", async ({ page }) => {
     .locator(Selectors.vinInput)
     .fill(`56789${Math.floor(Math.random() * 100000).toFixed()}`);
 
-  for (let i = 0; i < 11; i++) {
+  const dropdownCount = await page.locator(Selectors.selectContainer).count();
+
+    for (let i = 0; i < dropdownCount; i++) {
     await page
       .locator(Selectors.selectContainer)
       .nth(i)
