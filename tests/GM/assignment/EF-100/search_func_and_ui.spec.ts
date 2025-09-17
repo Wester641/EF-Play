@@ -8,12 +8,12 @@ test("EF-100__Verify Search Functionality and UI", async ({ page }) => {
   await page.goto(URLs.assigments);
 
   const apiResponse = await page.waitForResponse(
-    (response) =>
-      response
-        .url()
-        .includes("https://dev-app.easyfleet.ai/api/v1/vehicles/?limit=1000") &&
-      response.status() === 200
-  );
+  (response) =>
+    response
+    .url()
+    .includes("/api/v1/vehicles") &&
+    response.status() === 200
+);
 
   const apiResponseData = await apiResponse.json();
 
@@ -47,7 +47,15 @@ test("EF-100__Verify Search Functionality and UI", async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
-  // Check results on containing vehicleShortName | Will be added after bug fix
+  const filteredVehicles = await page.locator(Selectors.vehicleNameRow).allTextContents();
+  for (const name of filteredVehicles) {
+    let vehicleName = name;
+    const unitMatch = name.match(/^Unit #([^\s]+)/i);
+    if (unitMatch) {
+      vehicleName = unitMatch[1];
+    }
+    expect(vehicleName.toLowerCase()).toContain(randomVehicleShort.toLowerCase());
+  }
 
   await page.locator(Selectors.searchInput).fill(randomVehicleFull);
 
