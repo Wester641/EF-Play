@@ -36,7 +36,7 @@ test("EF-45__Units Table Functionality", async ({ page }) => {
     }
   }
 
-  await page.locator(Selectors.threeDotsMenu).nth(3).click();
+  await page.locator(Selectors.threeDotsMenu).nth(4).click();
   await expect(page.locator(Selectors.deleteAndArchive)).toBeVisible();
   await page.waitForTimeout(500);
   await page.locator(Selectors.archiveButton).nth(1).click();
