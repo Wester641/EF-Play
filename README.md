@@ -1,4 +1,4 @@
-# EF-Play Test Suite
+# EF-Play Test Suite 
 
 ## Overview
 This repository contains automated tests for the EasyFleet management system using Playwright. The test suite covers various aspects of fleet management functionality, including unit management and filtering capabilities.
@@ -10,7 +10,7 @@ This repository contains automated tests for the EasyFleet management system usi
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository::
 ```bash
 git clone [repository-url]
 cd EF-Play
