@@ -37,7 +37,11 @@ test("EF-299__Delete functionality test", async ({ page }) => {
   
   const { deleteModalButton: firstDeleteButton } = await checkModalWindow();
   await firstDeleteButton.click();
-  await page.waitForTimeout(2000);
+  
+  const successMessage = page.getByText('Successfully deleted!');
+  await expect(successMessage).toBeVisible({ timeout: 5000 });
   
   await expect(page.getByRole('button', { name: 'Cancel' })).not.toBeVisible();
+  
+  await expect(successMessage).not.toBeVisible({ timeout: 10000 });
 });
