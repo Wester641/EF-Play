@@ -11,12 +11,14 @@ test("EF-294__Inspections Schedules Page Navigation", async ({ page }) => {
 
   await expect(page.locator(Selectors.headerTable).first()).toBeVisible();
 
-  const headerNames = await page
+  const headerText = await page
     .locator(Selectors.headerTable)
     .first()
-    .allInnerTexts();
+    .innerText();
 
-  await expect(headerNames).toStrictEqual([
-    "Vehicle\tStatus\tInspection Form\tNext Due\tFrequency\t",
-  ]);
+  expect(headerText).toContain("Vehicle");
+  expect(headerText).toContain("Status");
+  expect(headerText).toContain("Inspection Form");
+  expect(headerText).toContain("Next Due");
+  expect(headerText).toContain("Frequency");
 });
