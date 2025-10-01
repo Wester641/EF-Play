@@ -9,8 +9,7 @@ export const Selectors = {
   colorDropdown: ".Styles_color__head__6fA04",
   color: ".Styles_color__modal__item__AH0Zu",
   tickInput: ".css-1m9pwf3",
-  inspectionFiel: ".Styles_items__item__7CSaH",
-  dataBlock: ".Block_block__U3GqW",
+  dataBlock: ".Styles_items__item__7CSaH",
   cellTitle: ".InspectionsFormsList_renderCell__title__te5Zz",
   listOfVehicle: ".css-1wbz3t9",
 };

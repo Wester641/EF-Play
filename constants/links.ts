@@ -36,7 +36,7 @@ export const URLs = {
   userEditPage: "/users/update/",
   inspection_history: "/inspections/history/",
   inspectionForms: "/inspections/forms/",
-  inspection_forms: "/inspections/forms",
+  inspection_schedules: "/schedules",
   issueCreatePage: "/issues/add",
   issues: "/issues",
   criticalFaults: "/faults",
