@@ -10,6 +10,7 @@ test("EF-100__Verify Search Functionality and UI", async ({ page }) => {
   const apiResponse = await page.waitForResponse(
   (response) =>
     response.url().includes("/api/v1/vehicles") &&
+    .includes("/api/v1/vehicles") &&
     response.status() === 200
 );
 
