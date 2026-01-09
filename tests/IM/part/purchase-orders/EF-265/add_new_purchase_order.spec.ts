@@ -16,10 +16,12 @@ test("EF-265__verify adding a new purchase order", async ({ page }) => {
   expect(page.locator(Selectors.new_purchase_order_form)).toBeVisible();
   await page.waitForTimeout(2000);
 
-  for (let i = 0; i < 2; i++) {
-    await page.locator(Selectors.select_fields).nth(i).click();
-    await page.getByRole("option").nth(0).click();
-  }
+  await page.locator(Selectors.select_fields).nth(0).click();
+  await page.getByRole("option").nth(0).click();
+
+  await page.locator(Selectors.select_field_2).nth(1).click();
+  const options = page.getByRole("option");
+  await options.first().click();
 
   await page.getByPlaceholder("12345").fill(`${randomNumber}`);
 

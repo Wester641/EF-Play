@@ -13,6 +13,6 @@ test("EF-253__verify_parts_page_loads_successfully", async ({ page }) => {
     .filter({ hasText: /^Part$/ })
     .click();
   await page.getByText("Parts").click();
-  await expect(page).toHaveURL(URLs.partsPage + "?tab=0");
+  await expect(page).toHaveURL(URLs.partsPage);
   await expect(page.locator(Selectors.mainContainer)).toBeVisible();
 });

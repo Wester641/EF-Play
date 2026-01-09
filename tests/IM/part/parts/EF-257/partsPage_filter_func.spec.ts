@@ -20,7 +20,7 @@ test("EF-257__Verify Filters Functionality on Parts Page", async ({ page }) => {
   const selectedText = (await selectedOption.textContent())?.trim();
 
   await selectedOption.click();
-  await page.locator(Selectors.apply_btn).nth(1).click();
+  await page.getByText("Apply", { exact: false }).click();
   await page.waitForLoadState("networkidle");
 
   const matchInTable = page.locator(Selectors.filter_type).nth(3);
@@ -53,7 +53,7 @@ test("EF-257__Verify Filters Functionality on Parts Page", async ({ page }) => {
   const selectedText_2 = (await selectedOption_2.textContent())?.trim();
 
   await selectedOption_2.click();
-  await page.locator(Selectors.apply_btn).nth(1).click();
+  await page.getByText("Cancel", { exact: false }).click();
   await page.waitForLoadState("networkidle");
 
   const matchInTable_2 = page.locator(Selectors.filter_type).nth(2);

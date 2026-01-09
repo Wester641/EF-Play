@@ -19,9 +19,8 @@ setup("Login and save session", async ({ page }) => {
     .fill(devCredentials.password); // here also change the credentials to simple "prodCredentials" instead "devCredentials"
   await page.getByRole("button", { name: "Login" }).click();
 
-  await page.waitForURL(
-    (url) => url.pathname === URLs.dashboard || url.pathname === URLs.units
-  );
+  await page.waitForSelector("text=Dashboard");
+
   await page.context().storageState({ path: ".auth/login.json" });
 });
 
