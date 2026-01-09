@@ -3,8 +3,8 @@ export const prodCredentials = {
   password: "admin2025",
 };
 export const devCredentials = {
-  email: "zafarzhon77@gmail.com",
-  password: "zafarzhon77",
+  email: "zer0icemax@gmail.com",
+  password: "Maksat2007.",
 };
 
 export const loginSelectors = {

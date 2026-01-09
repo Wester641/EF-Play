@@ -19,10 +19,16 @@ test("EF-255__verify_add_par_functionality", async ({ page }) => {
     .locator(Selectors.description_input)
     .fill(`This part was created in ${today} at ${time} by Autotest`);
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 3; i++) {
     await page.locator(Selectors.select_field).nth(i).click();
     await page.getByRole("option").nth(0).click();
   }
+  for (let i = 0; i < 2; i++) {
+  await page.locator(Selectors.select_field_2).nth(i).click();
+  const options = page.getByRole("option");
+  await options.first().click();
+}
+
   await page
     .getByRole("textbox", { name: "DD.MM.YYYY" })
     .fill(`${todayForFill}`);

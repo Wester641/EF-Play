@@ -7,6 +7,7 @@ export const Selectors = {
   shipping_input: 'input[name="shipping"]',
   tax_input: 'input[name="tax"]',
   description_input: 'textarea[name="description"]',
+  select_field_2: '[class*="Select_select__input"]',
 };
 
 export const today = new Date().toDateString();

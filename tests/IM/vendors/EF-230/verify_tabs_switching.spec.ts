@@ -7,6 +7,7 @@ test("EF-229__verify_tabs_switching ", async ({ page }) => {
 
   await page.getByText("Inventory management", { exact: true }).click();
   await page.getByText("Vendors", { exact: true }).click();
+  await page.waitForTimeout(5000);
 
   await page.getByRole("listitem").filter({ hasText: "Vehicle" }).click();
   await page.getByRole("listitem").filter({ hasText: "Service" }).click();
